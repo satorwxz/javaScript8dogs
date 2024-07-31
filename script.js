@@ -9,6 +9,7 @@ const row=document.querySelector('#row');
 const selectBreeds=document.querySelector('#select');
 const dog=document.querySelector('#dog');
 
+
 let breedsArr=[]
 
 fetch(breedsUrl)
@@ -44,12 +45,48 @@ selectBreeds.addEventListener('change', (event) => {
 })
 
 
-getDogs.addEventListener('click', (e) => {
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            return row.innerHTML=data.map(dog => {
-                return `
+// getDogs.addEventListener('click', (e) => {
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => {
+//             return row.innerHTML=data.map(dog => {
+//                 return `
+//         <div class='col-4'>
+//              <div>
+//                 <img src="${dog.url}" class="img" alt=""/>
+//             </div>
+//
+//         </div>
+//         `
+//             }).join('')
+//         })
+//
+// })
+//
+//
+// getDog.addEventListener('click', (e) => {
+//     fetch(url1)
+//         .then(res => res.json())
+//         .then(data => {
+//             return row.innerHTML=data.map(dog => {
+//                 return `
+//         <div class='col-4'>
+//              <div>
+//                 <img src="${dog.url}" class="img" alt=""/>
+//             </div>
+//
+//         </div>
+//         `
+//             }).join('')
+//         })
+//
+// })
+ const handleGetDogs=(arg) => {
+     fetch(arg)
+         .then(res => res.json())
+         .then(data => {
+             row.innerHTML=data.map(dog => {
+                 return `
         <div class='col-4'>
              <div>
                 <img src="${dog.url}" class="img" alt=""/>
@@ -57,26 +94,8 @@ getDogs.addEventListener('click', (e) => {
             
         </div>
         `
-            }).join('')
-        })
-
-})
-
-
-getDog.addEventListener('click', (e) => {
-    fetch(url1)
-        .then(res => res.json())
-        .then(data => {
-            return row.innerHTML=data.map(dog => {
-                return `
-        <div class='col-4'>
-             <div>
-                <img src="${dog.url}" class="img" alt=""/>
-            </div>
-            
-        </div>
-        `
-            }).join('')
-        })
-
-})
+             }).join('')
+         })
+ }
+getDogs.addEventListener('click', () => handleGetDogs(url))
+getDog.addEventListener('click', () => handleGetDogs(url1))
